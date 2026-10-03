@@ -1,7 +1,23 @@
-# Backend Dockerfile: Python 3.11 FastAPI Microservice
+# Backend Dockerfile: Python 3.11 FastAPI Microservice with Fail2ban & Nginx Reverse Proxy
 FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nginx \
+    fail2ban \
+    iptables \
+    procps \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
 COPY app ./app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+COPY nginx.conf /etc/nginx/sites-available/default
+COPY jail.local /etc/fail2ban/jail.local
+COPY filter.d/http-flood.conf /etc/fail2ban/filter.d/http-flood.conf
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 8000
+ENTRYPOINT ["/entrypoint.sh"]

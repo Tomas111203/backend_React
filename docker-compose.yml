@@ -9,9 +9,9 @@ services:
       LDAP_ORGANISATION: "Example Corp"
       LDAP_DOMAIN: "example.com"
       LDAP_ADMIN_PASSWORD: "adminpassword"
-    ports:
-      - "389:389"
-      - "636:636"
+    expose:
+      - "389"
+      - "636"
     volumes:
       - ldap_data:/var/lib/ldap
       - ldap_config:/etc/ldap/slapd.d
@@ -23,9 +23,22 @@ services:
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: "openldap2"
       PHPLDAPADMIN_HTTPS: "false"
-    ports:
-      - "8080:80"
+    expose:
+      - "80"
     depends_on: [openldap2]
+    networks: [auth-network]
+
+  ldap-proxy:
+    build: ./ldap-proxy
+    container_name: ldap-proxy
+    ports:
+      - "389:389"
+      - "636:636"
+      - "8080:8080"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on: [openldap2, phpldapadmin]
     networks: [auth-network]
 
   postgres:
@@ -82,6 +95,9 @@ services:
     container_name: videogames-api
     ports:
       - "8000:8000"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
     environment:
       KEYCLOAK_INTERNAL: http://keycloak:8080
       KEYCLOAK_PUBLIC: http://localhost:8081
@@ -103,6 +119,9 @@ services:
     container_name: videogames-frontend
     ports:
       - "3000:80"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
     depends_on: [videogames-api, keycloak]
     networks: [auth-network]
 
