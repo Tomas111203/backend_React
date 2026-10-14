@@ -1,0 +1,1 @@
+[generic-linux-lfi] [http] [high] http://videogames-api:8000//etc/passwd [paths="/etc/passwd"]

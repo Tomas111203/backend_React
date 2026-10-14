@@ -125,6 +125,9 @@ services:
     depends_on: [videogames-api, keycloak]
     networks: [auth-network]
 
+
+
+
 volumes:
   ldap_data:
   ldap_config:
@@ -133,3 +136,4 @@ volumes:
 
 networks:
   auth-network:
+    driver: bridge

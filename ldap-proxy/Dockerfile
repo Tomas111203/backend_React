@@ -1,6 +1,9 @@
 # LDAP Fail2ban Proxy Container (HTTP & LDAP TLS Protection)
 FROM nginx:alpine
-RUN apk add --no-cache fail2ban iptables
+RUN apk add --no-cache fail2ban iptables ca-certificates
+
+# Instalar Nuclei desde la imagen oficial
+COPY --from=projectdiscovery/nuclei:latest /usr/local/bin/nuclei /usr/local/bin/nuclei
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY jail.local /etc/fail2ban/jail.local

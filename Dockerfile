@@ -6,7 +6,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fail2ban \
     iptables \
     procps \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
+
+# Instalar Nuclei desde la imagen oficial
+COPY --from=projectdiscovery/nuclei:latest /usr/local/bin/nuclei /usr/local/bin/nuclei
 
 WORKDIR /app
 COPY requirements.txt .
