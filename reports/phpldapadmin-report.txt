@@ -1,0 +1,18 @@
+[swagger-api] [http] [info] http://videogames-api:8000/docs [paths="/docs"]
+[waf-detect:nginxgeneric] [http] [info] http://videogames-api:8000
+[redoc-api-docs] [http] [info] http://videogames-api:8000/redoc
+[http-missing-security-headers:x-content-type-options] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:cross-origin-embedder-policy] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:cross-origin-resource-policy] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:strict-transport-security] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:content-security-policy] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:permissions-policy] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:x-permitted-cross-domain-policies] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:referrer-policy] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:cross-origin-opener-policy] [http] [info] http://videogames-api:8000
+[http-missing-security-headers:x-frame-options] [http] [info] http://videogames-api:8000
+[options-method] [http] [info] http://videogames-api:8000 ["GET"]
+[missing-sri] [http] [info] http://videogames-api:8000/ ["https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"]
+[openapi] [http] [info] http://videogames-api:8000/openapi.json
+[tech-detect:nginx] [http] [info] http://videogames-api:8000
+[tech-detect:google-font-api] [http] [info] http://videogames-api:8000

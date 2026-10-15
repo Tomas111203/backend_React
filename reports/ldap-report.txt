@@ -1,0 +1,2 @@
+[ldap-metadata] [javascript] [info] openldap2:389 ["DomainFunctionality:","ForestFunctionality:","DomainControllerFunctionality:","BaseDN: dc=389","DnsHostName:","DefaultNamingContext:"]
+[ldap-anonymous-login-detect] [javascript] [medium] openldap2:389

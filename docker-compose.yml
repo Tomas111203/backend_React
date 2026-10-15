@@ -142,11 +142,12 @@ services:
       - "-target"
       - "http://videogames-api:8000"
       - "-severity"
-      - "medium,high,critical"
-      - "-etags"
-      - "spark,unifi"
+      - "low,medium,high,critical"
       - "-jsonl-export"
       - "/reports/nuclei-results.jsonl"
+      - "-o"
+      - "/reports/nuclei-report.txt"
+
 
 volumes:
   ldap_data:

@@ -1,0 +1,17 @@
+[swagger-api] [http] [info] http://videogames-frontend:80/docs [paths="/docs"]
+[waf-detect:nginxgeneric] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:referrer-policy] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:cross-origin-embedder-policy] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:strict-transport-security] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:x-frame-options] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:x-content-type-options] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:x-permitted-cross-domain-policies] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:cross-origin-opener-policy] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:cross-origin-resource-policy] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:content-security-policy] [http] [info] http://videogames-frontend:80
+[http-missing-security-headers:permissions-policy] [http] [info] http://videogames-frontend:80
+[nginx-version] [http] [info] http://videogames-frontend:80 ["nginx/1.31.7"]
+[tech-detect:google-font-api] [http] [info] http://videogames-frontend:80
+[tech-detect:nginx] [http] [info] http://videogames-frontend:80
+[missing-sri] [http] [info] http://videogames-frontend:80/ ["https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"]
+[openapi] [http] [info] http://videogames-frontend:80/openapi.json
