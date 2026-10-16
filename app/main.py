@@ -10,6 +10,9 @@ from app.database import get_db, engine, Base
 from app.models import Videogame
 from app.schemas import VideogameCreate, VideogameUpdate, VideogameResponse
 
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+
 # Create tables automatically if not present
 Base.metadata.create_all(bind=engine)
 
@@ -41,6 +44,23 @@ app = FastAPI(
     redoc_url="/redoc" if ENVIRONMENT != "production" else None,
     openapi_url="/openapi.json" if ENVIRONMENT != "production" else None,
 )
+
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+        response.headers["Content-Security-Policy"] = "default-src 'self'"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        response.headers["Permissions-Policy"] = "geolocation=(), microphone=()"
+        response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+        response.headers["Cross-Origin-Embedder-Policy"] = "require-corp"
+        response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
+        response.headers["X-Permitted-Cross-Domain-Policies"] = "none"
+        return response
+
+app.add_middleware(SecurityHeadersMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
