@@ -99,6 +99,7 @@ services:
       - NET_ADMIN
       - NET_RAW
     environment:
+      ENVIRONMENT: production
       KEYCLOAK_INTERNAL: http://keycloak:8080
       KEYCLOAK_PUBLIC: http://localhost:8081
       KEYCLOAK_REALM: cybersecurity
@@ -135,6 +136,7 @@ services:
       - scan
     volumes:
       - ./reports:/reports
+      - nuclei-templates:/root/nuclei-templates
     networks:
       - auth-network
     entrypoint: ["nuclei"]
@@ -154,6 +156,9 @@ volumes:
   ldap_config:
   keycloak_db:
   videogames_db:
+  nuclei-templates:
+    external: true
+    name: nuclei-templates
 
 networks:
   auth-network:

@@ -19,6 +19,7 @@ REALM = os.getenv("KEYCLOAK_REALM", "cybersecurity")
 CLIENT_ID = os.getenv("KEYCLOAK_CLIENT_ID", "fastapi-api")
 ISSUER = f"{KC_PUBLIC}/realms/{REALM}"
 JWKS_URL = f"{KC_INTERNAL}/realms/{REALM}/protocol/openid-connect/certs"
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 
 oauth2_scheme = OAuth2AuthorizationCodeBearer(
     authorizationUrl=f"{ISSUER}/protocol/openid-connect/auth",
@@ -30,10 +31,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
+
+
 app = FastAPI(
     title="Videogames API - LDAP + Keycloak JWT Service",
     version="1.0.0",
-    description="Microservice providing Videogames SQL data secured by LDAP & Keycloak JWT authentication."
+    description="...",
+    docs_url="/docs" if ENVIRONMENT != "production" else None,
+    redoc_url="/redoc" if ENVIRONMENT != "production" else None,
+    openapi_url="/openapi.json" if ENVIRONMENT != "production" else None,
 )
 
 app.add_middleware(
