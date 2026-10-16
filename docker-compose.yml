@@ -136,7 +136,6 @@ services:
       - scan
     volumes:
       - ./reports:/reports
-      - nuclei-templates:/root/nuclei-templates
     networks:
       - auth-network
     entrypoint: ["nuclei"]
@@ -157,8 +156,6 @@ volumes:
   keycloak_db:
   videogames_db:
   nuclei-templates:
-    external: true
-    name: nuclei-templates
 
 networks:
   auth-network:
